@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Calculator</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+#calculator {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+button {
+  width: 25%;
+  padding: 10px;
+  margin: 5px;
+  box-sizing: border-box;
+}
+</style>
+</head>
+<body>
+
+<div id="calculator">
+  <input type="text" id="display" readonly>
+  <div>
+    <button onclick="appendNumber('7')">7</button>
+    <button onclick="appendNumber('8')">8</button>
+    <button onclick="appendNumber('9')">9</button>
+    <button onclick="setOperator('/')">/</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('4')">4</button>
+    <button onclick="appendNumber('5')">5</button>
+    <button onclick="appendNumber('6')">6</button>
+    <button onclick="setOperator('*')">*</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('1')">1</button>
+    <button onclick="appendNumber('2')">2</button>
+    <button onclick="appendNumber('3')">3</button>
+    <button onclick="setOperator('-')">-</button>
+  </div>
+  <div>
+    <button onclick="appendNumber('0')">0</button>
+    <button onclick="appendNumber('.')">.</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="setOperator('+')">+</button>
+  </div>
+  <button onclick="clearDisplay()">C</button>
+</div>
+
+<script>
+let display = document.getElementById('display');
+let operand1 = null;
+let operator = null;
+
+function appendNumber(num) {
+  display.value += num;
+}
+
+function setOperator(op) {
+  operand1 = parseFloat(display.value);
+  operator = op;
+  display.value = '';
+}
+
+function calculate() {
+  let operand2 = parseFloat(display.value);
+  let result;
+
+  switch (operator) {
+    case '+': result = operand1 + operand2; break;
+    case '-': result = operand1 - operand2; break;
+    case '*': result = operand1 * operand2; break;
+    case '/': result = operand1 / operand2; break;
+    default: return;
+  }
+  display.value = result;
+  operand1 = null;
+  operator = null;
+}
+
+function clearDisplay() {
+  display.value = '';
+  operand1 = null;
+  operator = null;
+}
+</script>
+
+</body>
+</html>
